@@ -1,0 +1,73 @@
+Datos que tendras 
+
+datos primarios :
+sexo:
+edad:
+pais:
+latitud y longitud:
+patologiasExistentes
+
+
+
+datos secundarios: 
+puntuaciones(float):
+tiempo:
+expresiones 
+	
+
+
+CREATE DATABASE HACKATHON;
+
+--creacion base de datos
+CREATE DATABASE Hackathon;
+
+--Creación de la tabla Test ahi almacenaremos las respuestas del test
+CREATE TABLE Test (
+			ID_Test int PRIMARY KEY  ,
+			Edad NUMERIC,
+			Sexo NUMERIC,
+			Pais NVARCHAR (10),
+			Longitud NVARCHAR(10),
+			Latitud NVARCHAR(10),
+			Num_Colegial int,
+			fk_EnfermedExistentes int,
+			CONSTRAINT fk_EnfermedExistentes 
+            FOREIGN KEY (fk_EnfermedExistentes)
+            REFERENCES Enfermedades (ID_Enfermedad),
+			fk_Respuesta int,
+			CONSTRAINT fk_Respuesta 
+            FOREIGN KEY (fk_Respuesta)
+            REFERENCES Respuestas (Id_Respuesta),
+			
+			      );
+
+--Creacion de la tabla respuesta basandonos en la respuesta
+CREATE TABLE Respuestas(
+						Id_Respuesta int PRIMARY KEY,
+						Score int,
+						Tiempo int,
+						
+
+						);
+
+--la tabla de enfermedades son un catalogo de enfermedades que el paciente puede tener antes de realizar un test
+CREATE TABLE Enfermedades(
+						 ID_Enfermedad int NOT NULL PRIMARY KEY,
+						 Nom_Enfermedad Nvarchar(20)
+						);
+
+
+
+
+--Inserción de datos para el test
+INSERT INTO Test VALUES(101,
+			45,1,'MEXICO','99.1276600','19.4284700',19233,301,201);
+--pondremos informacion de las enfermedades que puede padecer el paciente
+INSERT INTO Enfermedades VALUES (301,'Hipertensión');
+INSERT INTO Enfermedades VALUES (302,'Demencia senil');
+--aqui pondremos unos resultados que el usario puede obtener
+INSERT INTO Respuestas VALUES(201,89,12.4);
+--Consultas de las tablas
+SELECT * FROM Enfermedades
+SELECT * FROM Respuestas
+SELECT * FROM Test
